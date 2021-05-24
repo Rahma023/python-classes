@@ -1,11 +1,43 @@
-class Bank:
-    Brand="KCB"
-def __init__(self,save,withdraw):
-    self.save=save
-    self.withdraw=withdraw
+class Account:
+    
+    def __init__(self,name,phone_number):
+        self.name=name
+        self.phone_number=phone_number
 
-def fillingform(self):
-   return f"Tom stores his {self.save} in KCB"
+        self.balance=0
 
-def savings(self):
-   return f"Tom takes half of his {self.withdraw}"
+    def show_balance(self):
+      return f"Hello {self.name} your balance is {self.balance}"
+
+    def deposite(self,amount):
+      if amount > self.balance:
+         return f"Hello {self.name} your balance is {self.balance} "
+      else:
+        self.balance-=amount
+        return f"Hello {self.name} you cannot withdraw {self.show_balance()}"
+
+    def withdraw(self,amount):
+      if amount > self.balance:
+        return f"Hello {self.name} your balance is {self.balance} you cannot withdraw {amount}"
+
+      else:
+        self.balance-=amount
+        return f"Hello {self.name} you have deposited {amount} Ksh you cannot withdraw {self.show_balance()} "
+
+    def borrow(self,amount):
+      return f"Hello {self.name} you have taken a loan of {amount} "
+
+    def repay(self,amount):
+      return f"Hello {self.name} you have repaid a loan of {amount} "
+
+
+
+
+        
+
+
+
+
+    
+
+    
