@@ -6,6 +6,8 @@ class Account:
 
         self.balance=0
         self.statement=[]
+        self.loan=0
+        
 
     def show_balance(self):
       return f"Hello {self.name} your balance is {self.balance}"
@@ -18,7 +20,8 @@ class Account:
         now=datetime.now()
         transaction={"amount":100, "time":now, "narration":"deposited"}
         self.statement.append(transaction)
-        return f"Hello {self.name} you cannot withdraw {self.show_balance()}"
+        return f"Hello {self.name} your balance is {self.balance} "
+        # return f"Hello {self.name} you cannot withdraw {self.show_balance()}"
 
     def show_statement(self):
       for transaction in self.statement:
@@ -41,21 +44,36 @@ class Account:
        
 
         return f"Hello {self.name} you have deposited {amount} Ksh you cannot withdraw {self.show_balance()} "
-
+        
     def borrow(self,amount):
-      return f"Hello {self.name} you have taken a loan of {amount} "
+      if amount < 0:
+        return f"Hello {self.name} your amount should be more than 0 "
+      elif self.loan > 0:
+        return f"Hello {self.name} you already have a loan " 
+     
+      elif amount < 0.1*self.balance:
+        return f"Hello {self.name} you cannot have a loan your loan limit is {0.05*self.balance} "
+      else:
+        loan=amount*1.05
+        self.loan=loan
+        self.balance += amount
+        self.balance-= amount
+        now=datetime.now()
+        transaction={"amount":4000, "time":now, "narration":"deposited"}
+        self.statement.append(transaction)
+        return f"{self.show_balance()} and your new balance is {self.balance} "
 
     def repay(self,amount):
-      return f"Hello {self.name} you have repaid a loan of {amount} "               
-
-
-
-
-        
-
-
-
-
-    
-
-    
+      if amount < 0:
+        return f"Hello {self.name} you have not repaid a loan of {amount} "  
+      elif amount <= self.loan:
+        self.loan -= amount
+        return f"Hello {self.name} you have repaid  {amount} "
+      else:
+        diff=amount-self.loan
+        self.loan=0
+        self.deposit(diff)
+        now=datetime.now()
+        transaction={"amount":300, "time":now, "narration":"deposited"}
+        self.statement.append(transaction)
+        return f"Hello {self.name} you have repaid your loan of {self.show_balance()} and your new balance is {diff} "
