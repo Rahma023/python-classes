@@ -7,7 +7,7 @@ def divisible_by_three(n):
     for x in x:
         if x%3==0:
             print(x)
-    divisible_by_three(30)
+divisible_by_three(30)
 
 
 x = [[1,2],[3,4],[5,6]]
